@@ -14,6 +14,18 @@ function randomCapped(min, max){
     return random(dif) + min;
 }
 
+function randomizeTrait(traits){
+    var myTraits = [];
+    for(i=0;i<5;i++){
+        var trait = randomizeArray(traits);
+        while(traits.indexOf(myTraits)>0){
+            trait = randomizeArray(traits);
+        }
+        myTraits.push(trait)
+    }
+    return myTraits;
+}
+
 //Step 1: We will define the activities : 12 activities, 4 being chores
 //Now to make the factory function
 
@@ -37,3 +49,19 @@ const chore1 = createActivity("Wash Dishes", ['workaholic', 'neat'], 20, true);
 const chore2 = createActivity("Cook a Meal", ['workaholic', 'epicurean'], 50, true);
 const chore3 = createActivity("Clean the Living Room", ['workaholic', 'neat'], 40, true);
 const chore4 = createActivity("Pay the bills", ['workaholic'], 5, true);
+
+const traits = ['outgoing', 'nice', 'brave', 'playful', 'epicurean', 'lazy', 'sporty', 'mean', 'kleptomaniac'];
+const activities = ["Gossip with the neighbors","Throw a house party","Mix Cocktails","Play Video Games","Watch Netflix","Go Jogging","Argue with the neighbors","Steal from the local cafe",
+"Wash Dishes", "Cook a Meal", "Clean the Living Room","Pay the bills"]
+
+//Step 2: Now we will work on Sarah
+
+const sarah = {
+    name: 'Sarah',
+    energy: 200 + random(50),
+    traits: randomizeTrait(traits)
+}
+
+//The area below is reserved for testing
+
+console.log(sarah.traits);
