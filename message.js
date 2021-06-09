@@ -41,7 +41,7 @@ function chooseActivity(person, activities, bannedActivities = []){
             //This is for the activities that can be completed
             allScores[i] = randomCapped(30,60);
             if(activities[i].isChore == true){
-                allScores[i] += 10;
+                allScores[i] += 30;
             }
             let activityTraits = activities[i].preferredTraits;
             let personTraits = person.traits;
@@ -69,6 +69,7 @@ function chooseActivity(person, activities, bannedActivities = []){
 
 }
 
+
 //This is a checker function used for debugging
 
 function ok(message = 'OK!'){
@@ -93,7 +94,7 @@ const act4 = createActivity("Play Video Games", ['playful', 'lazy'], 60, false);
 const act5 = createActivity("Watch Netflix", ['lazy'], 10 , false);
 const act6 = createActivity("Go Jogging", ['sporty'], 80, false);
 const act7 = createActivity("Argue with the neighbors", ['outgoing', 'mean'], 25 , false);
-const act8 = createActivity("Steal from the local cafe", ['mean', 'sporty', 'kleptomaniac'], 70, false);
+const act8 = createActivity("Steal from the local cafe", ['mean', 'sporty', 'kleptomaniac', 'brave'], 70, false);
 const chore1 = createActivity("Wash Dishes", ['workaholic', 'neat'], 20, true);
 const chore2 = createActivity("Cook a Meal", ['workaholic', 'epicurean'], 50, true);
 const chore3 = createActivity("Clean the Living Room", ['workaholic', 'neat'], 40, true);
@@ -101,7 +102,12 @@ const chore4 = createActivity("Pay the bills", ['workaholic'], 5, true);
 
 const traits = ['outgoing', 'nice', 'brave', 'playful', 'epicurean', 'lazy', 'sporty', 'mean', 'kleptomaniac'];
 const activities = [act1, act2, act3, act4, act5, act6, act7, act8, chore1, chore2, chore3, chore4];
-
+const narratedActivities = ["Sarah goes out of her apartment and chats with the neighbors about the latest buzz.", "Sarah picks up her phone and throws a monster party!",
+                           "Sarah gets thirsty and decides to mix herself some cocktails.", "Getting bored, Sarah powers her PC and plays some Video Games.", "Sarah plunges on her couch and watches Netflix.", 
+                           "Sarah goes out jogging.", "Feeling angry, Sarah bursts out of her apartment to harass her neighbors.", "After running out of coffee, Sarah decides to steal some from a coffee shop.",
+                           "Sarah sees the dishes in the sink and decides to wash them.", "Feeling hungry, Sarah decides to prepare a meal.", "Sarah cleans the mess she made in the cleaning room.", 
+                           "Sarah pays the bills."]
+                           
 //Step 2: Now we will work on Sarah
 
 const sarah = {
@@ -120,16 +126,19 @@ while(sarah.energy>0){
     var sarahActivity = chooseActivity(sarah, activities, completedActivities);
     //This is when Sarah cannot complete any more activities
     if(sarahActivity == null){
-        console.log("Sarah is too tired to do anything")
+        console.log("Sarah retires for the day.")
         sarah.energy = 0;
     }
     else{
         sarah.energy = sarah.energy - sarahActivity.energyScore;
         //We need to ensure that the activities are not repeated
         completedActivities.push(sarahActivity);
-        //This code is temporary and just here for testing
-        console.log(`Sarah is executing activity ${sarahActivity.name}`);
+        console.log(narratedActivities[activities.indexOf(sarahActivity)])
     }
 }
+
+//Step 4: Narrations - for this we will need a function to narrate Sarah's life
+
+
 //The area below is reserved for testing
 
